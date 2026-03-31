@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0-simplified",
+  "description": "AI宠物健康管理系统 - 简化版工作流配置",
+  "dify": {
+    "base_url": "http://47.113.151.36//v1",
+    "api_key": "",
+    "timeout": 60000
+  },
+  "workflows": [
+    {
+      "id": "health-analysis-workflow",
+      "name": "健康分析工作流",
+      "type": "user_triggered",
+      "trigger": "user_action",
+      "description": "分析宠物健康数据并提供建议",
+      "dify_config": {
+        "workflow_id": "",
+        "workflow_key": "",
+        "enabled": false
+      },
+      "tasks": [
+        {
+          "id": "analyze_data",
+          "name": "分析健康数据",
+          "type": "ai_analysis",
+          "description": "使用AI分析健康数据"
+        },
+        {
+          "id": "generate_recommendation",
+          "name": "生成建议",
+          "type": "ai_generation",
+          "description": "生成健康建议"
+        }
+      ]
+    }
+  ]
+}

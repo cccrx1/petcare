@@ -46,6 +46,7 @@ PetCare/
 │   ├── agents-config.json     # 智能体配置
 │   ├── workflows-config.json  # 工作流配置
 │   ├── api-config.json        # API配置
+│   ├── DIFY_OUTPUT_FORMAT.md  # Dify输出格式规范（重要）
 │   └── README.md             # 配置说明
 ├── database/                  # 数据库相关
 │   ├── migrations/            # 数据库迁移
@@ -110,6 +111,8 @@ PetCare/
 | nutrition-agent | 喂养方案定制 | 营养规划 |
 | training-agent | 行为训练 | 行为纠正 |
 
+**⚠️ 重要**：在配置智能体之前，请务必阅读 [config/DIFY_OUTPUT_FORMAT.md](config/DIFY_OUTPUT_FORMAT.md) 了解输出格式要求。
+
 ## 工作流配置
 
 系统配置了4个自动化工作流：
@@ -120,6 +123,8 @@ PetCare/
 | health-info-workflow | 健康资讯工作流 | 定时任务 |
 | feeding-adjustment-workflow | 喂养方案调整工作流 | 定时任务 |
 | veterinary-consultation-workflow | 兽医咨询工作流 | 用户触发 |
+
+**⚠️ 重要**：在配置工作流之前，请务必阅读 [config/DIFY_OUTPUT_FORMAT.md](config/DIFY_OUTPUT_FORMAT.md) 了解输出格式要求。
 
 ## 快速开始
 

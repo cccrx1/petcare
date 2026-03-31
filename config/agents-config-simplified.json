@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-simplified",
+  "description": "AI宠物健康管理系统 - 简化版智能体配置",
+  "dify": {
+    "base_url": "http://47.113.151.36//v1",
+    "api_key": "",
+    "timeout": 30000
+  },
+  "agents": [
+    {
+      "id": "pet-health-assistant",
+      "name": "宠物健康助手智能体",
+      "type": "central",
+      "role": "中枢智能体",
+      "description": "用户与系统的唯一交互入口，负责健康咨询和喂养建议",
+      "dify_config": {
+        "agent_id": "",
+        "agent_key": "",
+        "enabled": true
+      },
+      "capabilities": [
+        "健康咨询",
+        "喂养建议",
+        "行为指导"
+      ]
+    }
+  ]
+}
