@@ -4,7 +4,7 @@
 
 const express = require('express');
 const router = express.Router();
-const healthController = require('../controllers/healthController');
+const healthController = require('../controllers/healthController-simplified');
 
 // 所有路由通过sessionId验证
 router.post('/records', healthController.createRecord);

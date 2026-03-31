@@ -13,11 +13,11 @@ const rateLimit = require('express-rate-limit');
 const logger = require('./utils/logger');
 const config = require('./config');
 
-// 导入路由
-const userRoutes = require('./routes/users');
-const petRoutes = require('./routes/pets');
-const healthRoutes = require('./routes/health');
-const chatRoutes = require('./routes/chat');
+// 导入路由（使用简化版）
+const userRoutes = require('./routes/users-simplified');
+const petRoutes = require('./routes/pets-simplified');
+const healthRoutes = require('./routes/health-simplified');
+const chatRoutes = require('./routes/chat-simplified');
 
 // 导入中间件
 const errorHandler = require('./middleware/errorHandler');

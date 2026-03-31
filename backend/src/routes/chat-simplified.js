@@ -4,7 +4,7 @@
 
 const express = require('express');
 const router = express.Router();
-const chatController = require('../controllers/chatController');
+const chatController = require('../controllers/chatController-simplified');
 
 // 所有路由通过sessionId验证
 router.post('/message', chatController.sendMessage);
