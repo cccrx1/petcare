@@ -20,7 +20,7 @@ const healthRoutes = require('./routes/health-simplified');
 const chatRoutes = require('./routes/chat-simplified');
 
 // 导入中间件
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware/errorHandler');
 
 // 创建Express应用
 const app = express();
@@ -84,7 +84,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     logger.info(`Server running on port ${PORT}`);
     logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
-    logger.info(`Data directory: ${config.dataDir || './data'}`);
+    logger.info(`Data directory: ${process.env.DATA_DIR || './data'}`);
     logger.info(`Simplified version - No database required`);
 });
 
