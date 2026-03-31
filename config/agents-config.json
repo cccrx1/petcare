@@ -1,0 +1,120 @@
+{
+  "version": "1.0.0",
+  "description": "AI宠物健康管理系统 - 智能体统一配置文件",
+  "dify": {
+    "base_url": "http://47.113.151.36//v1",
+    "api_key": "",
+    "timeout": 30000
+  },
+  "agents": [
+    {
+      "id": "pet-health-assistant",
+      "name": "宠物健康助手智能体",
+      "type": "central",
+      "role": "中枢智能体",
+      "description": "用户与系统的唯一交互入口，负责自然语言理解、意图调度和结果整合",
+      "dify_config": {
+        "agent_id": "",
+        "agent_key": "",
+        "enabled": true
+      },
+      "capabilities": [
+        "自然语言理解",
+        "意图识别与调度",
+        "多智能体协调",
+        "结果整合与回复"
+      ],
+      "routing_rules": {
+        "health_questions": "veterinarian-agent",
+        "feeding_questions": "nutrition-agent",
+        "behavior_questions": "training-agent",
+        "data_queries": "direct_database"
+      }
+    },
+    {
+      "id": "veterinarian-agent",
+      "name": "兽医智能体",
+      "type": "specialized",
+      "role": "专业执业兽医模拟",
+      "description": "基于RAG技术，提供宠物健康咨询、症状分析、用药建议等服务",
+      "dify_config": {
+        "agent_id": "",
+        "agent_key": "",
+        "enabled": true
+      },
+      "capabilities": [
+        "多轮问诊",
+        "症状匹配与鉴别诊断",
+        "用药建议（非处方药）",
+        "紧急程度判断",
+        "处方药就医指引"
+      ],
+      "knowledge_base": {
+        "name": "兽医知识库",
+        "size": "2000万+病历",
+        "enabled": true
+      }
+    },
+    {
+      "id": "nutrition-agent",
+      "name": "喂养方案定制智能体",
+      "type": "specialized",
+      "role": "宠物营养师",
+      "description": "基于NRC营养需求模型，计算每日代谢能量需求，生成个性化喂养方案",
+      "dify_config": {
+        "agent_id": "",
+        "agent_key": "",
+        "enabled": true
+      },
+      "capabilities": [
+        "能量需求计算（MER）",
+        "营养规划（蛋白质/脂肪/碳水化合物）",
+        "微量元素平衡",
+        "动态喂养调整",
+        "处方粮建议"
+      ],
+      "model": {
+        "name": "NRC犬猫营养需求模型",
+        "parameters": {
+          "weight_factor": true,
+          "age_factor": true,
+          "activity_factor": true
+        }
+      }
+    },
+    {
+      "id": "training-agent",
+      "name": "行为训练智能体",
+      "type": "specialized",
+      "role": "宠物行为训练师",
+      "description": "提供常见行为问题的纠正方案和训练计划",
+      "dify_config": {
+        "agent_id": "",
+        "agent_key": "",
+        "enabled": true
+      },
+      "capabilities": [
+        "行为问题诊断",
+        "正向训练方法指导",
+        "分步训练计划",
+        "训练进度跟踪"
+      ],
+      "problem_categories": [
+        "乱叫",
+        "拆家",
+        "随地大小便",
+        "扑人",
+        "护食",
+        "分离焦虑"
+      ]
+    }
+  ],
+  "agent_communication": {
+    "protocol": "message_queue",
+    "timeout": 5000,
+    "retry_policy": {
+      "max_retries": 3,
+      "backoff_ms": 1000
+    }
+  }
+}

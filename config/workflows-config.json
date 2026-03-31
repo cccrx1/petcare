@@ -1,0 +1,261 @@
+{
+  "version": "1.0.0",
+  "description": "AI宠物健康管理系统 - 工作流统一配置文件",
+  "dify": {
+    "base_url": "http://47.113.151.36//v1",
+    "api_key": "",
+    "timeout": 60000
+  },
+  "workflows": [
+    {
+      "id": "anomaly-detection-workflow",
+      "name": "异常预警工作流",
+      "type": "automated",
+      "trigger": "database_event",
+      "description": "实时监听数据库监测数据，运行异常检测算法，自动推送预警通知",
+      "dify_config": {
+        "workflow_id": "",
+        "workflow_key": "",
+        "enabled": true
+      },
+      "schedule": {
+        "type": "real_time",
+        "trigger_events": [
+          "health_data_inserted",
+          "health_data_updated"
+        ]
+      },
+      "tasks": [
+        {
+          "id": "read_monitoring_data",
+          "name": "读取监测数据",
+          "type": "database_query",
+          "description": "从数据库读取最新的健康监测数据"
+        },
+        {
+          "id": "anomaly_detection",
+          "name": "异常检测",
+          "type": "ai_model",
+          "model": "GRU-Autoencoder",
+          "description": "使用时序异常检测算法识别健康风险"
+        },
+        {
+          "id": "risk_assessment",
+          "name": "风险评估",
+          "type": "rule_engine",
+          "description": "根据检测结果进行风险分级"
+        },
+        {
+          "id": "notification_generation",
+          "name": "生成预警通知",
+          "type": "ai_generation",
+          "description": "生成对应的预警消息和建议"
+        },
+        {
+          "id": "save_alert",
+          "name": "保存预警记录",
+          "type": "database_write",
+          "description": "将预警信息写入数据库"
+        },
+        {
+          "id": "push_notification",
+          "name": "推送用户通知",
+          "type": "notification_service",
+          "description": "通过推送服务通知用户"
+        }
+      ],
+      "risk_levels": {
+        "low": {
+          "description": "低风险",
+          "action": "推送自查指南，建议继续观察"
+        },
+        "medium": {
+          "description": "中风险",
+          "action": "推送健康建议，提醒用户注意饮食"
+        },
+        "high": {
+          "description": "高风险",
+          "action": "自动触发兽医咨询预约，建议尽快就医"
+        }
+      },
+      "detection_rules": {
+        "weight_drop": {
+          "condition": "连续3天体重下降超过5%",
+          "risk_level": "high"
+        },
+        "water_intake_spike": {
+          "condition": "单日饮水量超过平时的2倍",
+          "risk_level": "medium"
+        },
+        "activity_drop": {
+          "condition": "连续12小时无运动记录",
+          "risk_level": "low"
+        }
+      }
+    },
+    {
+      "id": "health-info-workflow",
+      "name": "健康资讯工作流",
+      "type": "automated",
+      "trigger": "scheduled",
+      "description": "定期检查宠物的生命周期节点，自动推送对应的养护知识与体检提醒",
+      "dify_config": {
+        "workflow_id": "",
+        "workflow_key": "",
+        "enabled": true
+      },
+      "schedule": {
+        "type": "cron",
+        "expression": "0 9 * * *",
+        "description": "每天上午9点执行"
+      },
+      "tasks": [
+        {
+          "id": "check_lifecycle_stage",
+          "name": "检查生命周期节点",
+          "type": "database_query",
+          "description": "查询宠物的年龄和生命周期状态"
+        },
+        {
+          "id": "generate_content",
+          "name": "生成健康资讯",
+          "type": "ai_generation",
+          "description": "根据生命周期节点生成个性化健康知识"
+        },
+        {
+          "id": "match_content",
+          "name": "匹配资讯内容",
+          "type": "content_matching",
+          "description": "从知识库中匹配相关的健康资讯"
+        },
+        {
+          "id": "push_info",
+          "name": "推送资讯",
+          "type": "notification_service",
+          "description": "推送健康资讯给用户"
+        }
+      ],
+      "lifecycle_events": {
+        "teething": {
+          "stage": "6月龄",
+          "content": "换牙期护理指南"
+        },
+        "vaccination_reminder": {
+          "stage": "每年",
+          "content": "疫苗接种提醒"
+        },
+        "senior_care": {
+          "stage": "7岁",
+          "content": "老年宠物养护指南"
+        }
+      }
+    },
+    {
+      "id": "feeding-adjustment-workflow",
+      "name": "喂养方案调整工作流",
+      "type": "automated",
+      "trigger": "scheduled",
+      "description": "每周根据宠物体重变化，自动调整喂养方案",
+      "dify_config": {
+        "workflow_id": "",
+        "workflow_key": "",
+        "enabled": true
+      },
+      "schedule": {
+        "type": "cron",
+        "expression": "0 10 * * 1",
+        "description": "每周一上午10点执行"
+      },
+      "tasks": [
+        {
+          "id": "analyze_weight_trend",
+          "name": "分析体重趋势",
+          "type": "data_analysis",
+          "description": "分析过去一周的体重变化"
+        },
+        {
+          "id": "calculate_adjustment",
+          "name": "计算调整方案",
+          "type": "ai_model",
+          "description": "基于体重变化计算喂养方案的调整"
+        },
+        {
+          "id": "update_feeding_plan",
+          "name": "更新喂养方案",
+          "type": "database_write",
+          "description": "将新的喂养方案写入数据库"
+        },
+        {
+          "id": "notify_user",
+          "name": "通知用户",
+          "type": "notification_service",
+          "description": "推送喂养方案调整通知"
+        }
+      ]
+    },
+    {
+      "id": "veterinary-consultation-workflow",
+      "name": "兽医咨询工作流",
+      "type": "user_triggered",
+      "trigger": "user_action",
+      "description": "处理用户的在线问诊请求，进行分诊、评估和记录",
+      "dify_config": {
+        "workflow_id": "",
+        "workflow_key": "",
+        "enabled": true
+      },
+      "tasks": [
+        {
+          "id": "triage",
+          "name": "分诊评估",
+          "type": "ai_agent",
+          "agent": "veterinarian-agent",
+          "description": "通过对话收集症状信息"
+        },
+        {
+          "id": "symptom_matching",
+          "name": "症状匹配",
+          "type": "knowledge_search",
+          "description": "匹配知识库中的疾病特征"
+        },
+        {
+          "id": "diagnosis_suggestion",
+          "name": "诊断建议",
+          "type": "ai_generation",
+          "description": "生成初步诊断和建议"
+        },
+        {
+          "id": "save_medical_record",
+          "name": "保存病历",
+          "type": "database_write",
+          "description": "将诊断结果写入宠物病史档案"
+        },
+        {
+          "id": "emergency_check",
+          "name": "紧急情况检查",
+          "type": "rule_engine",
+          "description": "识别急症并优先处理"
+        }
+      ]
+    }
+  ],
+  "workflow_settings": {
+    "max_concurrent_runs": 10,
+    "retry_policy": {
+      "max_retries": 3,
+      "backoff_ms": 2000
+    },
+    "logging": {
+      "enabled": true,
+      "level": "info"
+    },
+    "monitoring": {
+      "enabled": true,
+      "metrics": [
+        "execution_time",
+        "success_rate",
+        "error_count"
+      ]
+    }
+  }
+}
